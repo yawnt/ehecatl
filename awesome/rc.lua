@@ -43,13 +43,12 @@ terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
-home = os.getenv("HOME")
-config_dir = home .. "/.config/awesome"
-theme_dir = config_dir .. "/themes/"
-theme = "default"
+home_dir = os.getenv("HOME")
+config_dir = home_dir .. "/.config/awesome/"
+theme_name = "default"
 
 -- Themes define colours, icons, and wallpapers
-beautiful.init(theme_dir .. theme .. "/theme.lua")
+beautiful.init(config_dir .. theme_name .. "/theme.lua")
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
