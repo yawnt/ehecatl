@@ -47,7 +47,7 @@ editor_cmd = terminal .. " -e " .. editor
 home_dir = os.getenv("HOME")
 config_dir = home_dir .. "/.config/awesome/"
 theme_name = "heiwa"
-bar_height = 20
+bar_height = 18
 
 -- Themes define colours, icons, and wallpapers
 beautiful.init(config_dir .. theme_name .. "/theme.lua")
@@ -62,7 +62,6 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
@@ -73,7 +72,8 @@ local layouts =
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
+    awful.layout.suit.magnifier,
+    awful.layout.suit.floating
 }
 -- }}}
 
@@ -104,13 +104,13 @@ mytextclock = awful.widget.textclock()
 
 -- Left Arrow
 la_widget = wibox.widget.textbox()
-la_widget:set_markup("<span font='Inconsolata 20'><span background='black' color='#313131'>\xee\x82\xb2</span></span>")
+la_widget:set_markup("<span font='Inconsolata 18' background='black' color='#6A9FB5'>\xee\x82\xb2</span>")
 
 -- CPU widget
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(config_dir .. theme_name .. "/icons/cpu.png")
 cpuwidget = wibox.widget.textbox()
-vicious.register(cpuwidget, vicious.widgets.cpu, "<span font='Inconsolata 20'><span font='Inconsolata 10' background='#313131'>$1%</span></span>", 3)
+vicious.register(cpuwidget, vicious.widgets.cpu, "<span font='Inconsolata 18'><span font='Inconsolata 10' background='#6A9FB5'>$1%</span></span>", 3)
 cpuicon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(tasks, false) end)))
 
 
@@ -157,7 +157,7 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
    
     right_layout:add(la_widget)
-    right_layout:add(cpuicon)
+    --right_layout:add(cpuicon)
     right_layout:add(cpuwidget)
     
     if s == 1 then right_layout:add(systraywidget) end
@@ -301,7 +301,8 @@ awful.rules.rules = {
                      border_color = beautiful.border_normal,
                      focus = awful.client.focus.filter,
                      keys = clientkeys,
-                     buttons = clientbuttons } },
+                     buttons = clientbuttons
+                   } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },
