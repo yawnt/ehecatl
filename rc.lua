@@ -130,7 +130,7 @@ for s = 1, screen.count() do
     mywibox[s] = awful.wibox({ position = "top", screen = s })
 
     local txtbox = wibox.widget.textbox()
-    txtbox:set_text('<span>nexgay</span>')
+    txtbox:set_markup('<span>nexgay</span>')
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
