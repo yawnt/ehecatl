@@ -4,16 +4,16 @@
 
 theme = {}
 
-theme.font          = "sans 8"
+theme.font          = "Terminess Powerline 8"
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#535d6c"
+theme.bg_normal     = "#151515"
+theme.bg_focus      = "#151515"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
+theme.fg_normal     = "#d0d0d0"
+theme.fg_focus      = "#90a959"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
@@ -33,8 +33,8 @@ theme.border_marked = "#91231c"
 --theme.taglist_bg_focus = "#ff0000"
 
 -- Display the taglist squares
-theme.taglist_squares_sel   = "/home/sandro/.config/awesome/themes/default/taglist/squarefw.png"
-theme.taglist_squares_unsel = "/home/sandro/.config/awesome/themes/default/taglist/squarew.png"
+--theme.taglist_squares_sel   = "/home/sandro/.config/awesome/themes/default/taglist/squarefw.png"
+--theme.taglist_squares_unsel = "/home/sandro/.config/awesome/themes/default/taglist/squarew.png"
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
