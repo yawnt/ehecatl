@@ -10,6 +10,7 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+local vicious = require("vicious")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -45,7 +46,7 @@ editor_cmd = terminal .. " -e " .. editor
 
 home_dir = os.getenv("HOME")
 config_dir = home_dir .. "/.config/awesome/"
-theme_name = "default"
+theme_name = "heiwa"
 
 -- Themes define colours, icons, and wallpapers
 beautiful.init(config_dir .. theme_name .. "/theme.lua")
@@ -88,7 +89,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "net", "irc", "dev", "tty", "skp" }, s, layouts[1])
+    tags[s] = awful.tag({ "web", "irc", "dev", "tty", "skp" }, s, layouts[1])
 end
 -- }}}
 
@@ -99,6 +100,13 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- {{{ Wibox
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
+
+-- CPU widget
+cpuicon = wibox.widget.imagebox()
+cpuicon:set_image(beautiful.widget_cpu)
+cpuwidget = wibox.widget.textbox()
+vicious.register(cpuwidget, vicious.widgets.cpu, '<span background="#FFFFFF" font="Terminus 13" rise="2000"> <span font="Terminus 9">$1% </span></span>', 3)
+cpuicon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(tasks, false) end)))
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -141,7 +149,7 @@ for s = 1, screen.count() do
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
-
+    right_layout:add(cpuwidget)
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
