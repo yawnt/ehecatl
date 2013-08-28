@@ -47,6 +47,7 @@ editor_cmd = terminal .. " -e " .. editor
 home_dir = os.getenv("HOME")
 config_dir = home_dir .. "/.config/awesome/"
 theme_name = "heiwa"
+bar_height = 20
 
 -- Themes define colours, icons, and wallpapers
 beautiful.init(config_dir .. theme_name .. "/theme.lua")
@@ -89,7 +90,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "web", "irc", "dev", "tty", "skp" }, s, layouts[1])
+    tags[s] = awful.tag({ "web", "irc", "dev", "skp" }, s, layouts[1])
 end
 -- }}}
 
@@ -101,12 +102,20 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
 
+-- Left Arrow
+la_widget = wibox.widget.textbox()
+la_widget:set_markup("<span font='Inconsolata 20'><span background='black' color='#313131'>\xee\x82\xb2</span></span>")
+
 -- CPU widget
 cpuicon = wibox.widget.imagebox()
-cpuicon:set_image(beautiful.widget_cpu)
+cpuicon:set_image(config_dir .. theme_name .. "/icons/cpu.png")
 cpuwidget = wibox.widget.textbox()
-vicious.register(cpuwidget, vicious.widgets.cpu, '<span background="#FFFFFF" font="Terminus 13" rise="2000"> <span font="Terminus 9">$1% </span></span>', 3)
+vicious.register(cpuwidget, vicious.widgets.cpu, "<span font='Inconsolata 20'><span font='Inconsolata 10' background='#313131'>$1%</span></span>", 3)
 cpuicon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(tasks, false) end)))
+
+
+-- Systray widget
+systraywidget = wibox.widget.systray()
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -137,7 +146,7 @@ for s = 1, screen.count() do
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s })
+    mywibox[s] = awful.wibox({ position = "top", screen = s, height = bar_height })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -146,10 +155,15 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
+   
+    right_layout:add(la_widget)
+    right_layout:add(cpuicon)
+    right_layout:add(cpuwidget)
+    
+    if s == 1 then right_layout:add(systraywidget) end
+    
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
-    right_layout:add(cpuwidget)
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
