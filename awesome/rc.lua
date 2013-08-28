@@ -102,15 +102,11 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
 
--- Left Arrow
-la_widget = wibox.widget.textbox()
-la_widget:set_markup("<span font='Inconsolata 18' background='black' color='#6A9FB5'>\xee\x82\xb2</span>")
-
 -- CPU widget
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(config_dir .. theme_name .. "/icons/cpu.png")
 cpuwidget = wibox.widget.textbox()
-vicious.register(cpuwidget, vicious.widgets.cpu, "<span font='Inconsolata 18'><span font='Inconsolata 10' background='#6A9FB5'>$1%</span></span>", 3)
+vicious.register(cpuwidget, vicious.widgets.cpu, "<span font='Inconsolata 18' background='black' color='#6A9FB5'>\xee\x82\xb2<span font='Inconsolata 10' background='#6A9FB5' color='#151515' rise='3000'>$1%</span></span>", 3)
 cpuicon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(tasks, false) end)))
 
 
@@ -156,7 +152,6 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
    
-    right_layout:add(la_widget)
     --right_layout:add(cpuicon)
     right_layout:add(cpuwidget)
     
