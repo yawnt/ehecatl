@@ -130,16 +130,16 @@ for s = 1, screen.count() do
     mywibox[s] = awful.wibox({ position = "top", screen = s })
 
     local txtbox = wibox.widget.textbox()
-    txtbox:set_markup('<span>nexgay</span>')
+    txtbox:set_markup('<span color="blue" background="black">\xee\x82\xb2</span><span color="red" background="blue">yawngay</span><span color="red" background="blue">\xee\x82\xb2</span><span background="red">nexgay </span>')
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
-    left_layout:add(txtbox)
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
+    right_layout:add(txtbox)
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
