@@ -11,6 +11,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local vicious = require("vicious")
+local lines   = require("lines")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -39,8 +40,10 @@ end
 
 -- {{{ Variable definitions
 
+awful.util.spawn_with_shell("urxvtd")
+
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
+terminal = "urxvtc"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -48,6 +51,10 @@ home_dir = os.getenv("HOME")
 config_dir = home_dir .. "/.config/awesome/"
 theme_name = "heiwa"
 bar_height = 18
+
+linefg  = "#E0E0E0"
+linebg1 = "#505050"
+linebg2 = "#303030"
 
 -- Themes define colours, icons, and wallpapers
 beautiful.init(config_dir .. theme_name .. "/theme.lua")
@@ -98,23 +105,33 @@ end
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
--- {{{ Wibox
+-- {{{ Widgets
 -- Create a textclock widget
-mytextclock = awful.widget.textclock()
+clock = lines:format('%b %d %R', linefg, linebg2)
+cpu   = lines:format('$1%', linefg, linebg1)
+mem    = lines:format('$1%', linefg, linebg2)
+fs     = lines:format('${/ used_gb}GB / ${/ avail_gb}GB', linefg, linebg1)
+vol    = lines:format('$1%', linefg, linebg2)
+therm  = lines:format('$1°C', linefg, linebg1)
 
--- CPU widget
-cpuicon = wibox.widget.imagebox()
-cpuicon:set_image(config_dir .. theme_name .. "/icons/cpu.png")
-cpuwidget = wibox.widget.textbox()
-vicious.register(cpuwidget, vicious.widgets.cpu, "<span font='Inconsolata 18' background='black' color='#6A9FB5'>\xee\x82\xb2<span font='Inconsolata 10' background='#6A9FB5' color='#151515' rise='3000'>$1%</span></span>", 3)
-cpuicon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(tasks, false) end)))
+vicious.register(mem.widget, vicious.widgets.mem, mem.markup, 60)
+vicious.register(fs.widget, vicious.widgets.fs, fs.markup, 60)
+vicious.register(vol.widget, vicious.widgets.volume, vol.markup, 5, 'Master')
+vicious.register(therm.widget, vicious.widgets.thermal, therm.markup, 60, {'coretemp.0', 'core'})
+vicious.register(clock.widget, vicious.widgets.date, clock.markup, 60)
+vicious.register(cpu.widget, vicious.widgets.cpu, cpu.markup, 60)
 
-
--- Systray widget
-systraywidget = wibox.widget.systray()
+-- Date Widget
+clockicon = lines:img(beautiful.clockicon, linebg2)
+cpuicon   = lines:img(beautiful.cpuicon, linebg1)
+memicon   = lines:img(beautiful.memicon, linebg2)
+fsicon    = lines:img(beautiful.fsicon, linebg1)
+volicon   = lines:img(beautiful.volicon, linebg2)
+thermicon = lines:img(beautiful.thermicon, linebg1)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
+mywibox2 = {}
 mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
@@ -143,6 +160,13 @@ for s = 1, screen.count() do
 
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", screen = s, height = bar_height })
+    mywibox2[s] = awful.wibox({ position = "bottom", screen = s, height = bar_height })
+
+    local left_layout2 = wibox.layout.fixed.horizontal()
+    left_layout2:add(mylayoutbox[s])
+    
+    local right_layout2 = wibox.layout.fixed.horizontal()
+    right_layout2:add(wibox.widget.systray())
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -151,20 +175,41 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-   
-    --right_layout:add(cpuicon)
-    right_layout:add(cpuwidget)
     
-    if s == 1 then right_layout:add(systraywidget) end
+    right_layout:add(lines:arrow(beautiful.bg_normal).widget) 
+
+    right_layout:add(thermicon)
+    right_layout:add(therm.widget)
+
+    right_layout:add(volicon)
+    right_layout:add(vol.widget)
+
+    right_layout:add(fsicon)
+    right_layout:add(fs.widget)
+
+    right_layout:add(memicon)
+    right_layout:add(mem.widget) 
+  
+    right_layout:add(cpuicon)
+    right_layout:add(cpu.widget)
+
+    right_layout:add(clockicon)
+    right_layout:add(clock.widget)
     
-    right_layout:add(mytextclock)
-    right_layout:add(mylayoutbox[s])
+    --if s == 1 then right_layout:add(systraywidget) end
+    
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
     layout:set_right(right_layout)
 
     mywibox[s]:set_widget(layout)
+
+    local layout2 = wibox.layout.align.horizontal()
+    layout2:set_left(left_layout2)
+    layout2:set_right(right_layout2)
+
+    mywibox2[s]:set_widget(layout2)
 end
 -- }}}
 

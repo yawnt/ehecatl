@@ -93,6 +93,13 @@ theme.layout_fullscreen                     = theme_dir .. "/icons/fullscreen.pn
 theme.layout_magnifier                      = theme_dir .. "/icons/magnifier.png"
 theme.layout_floating                       = theme_dir .. "/icons/floating.png"
 
+-- Icons
+theme.cpuicon   = theme_dir .. "/icons/cpu.png"
+theme.clockicon = theme_dir .. "/icons/clock.png"
+theme.memicon   = theme_dir .. "/icons/mem.png"
+theme.fsicon    = theme_dir .. "/icons/fs.png"
+theme.volicon   = theme_dir .. "/icons/spkr.png"
+theme.thermicon = theme_dir .. "/icons/temp.png"
 
 theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
 

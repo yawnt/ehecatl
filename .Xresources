@@ -1,5 +1,6 @@
 URxvt.font     : xft:Inconsolata:hinting=true:autohint=true:size=11
 URxvt.scrollBar: false
+URxvt.cursorUnderline:  true
 
 URxvt.perl-ext-common: default,clipboard
 
