@@ -102,6 +102,7 @@ theme.volicon   = theme_dir .. "/icons/spkr.png"
 theme.thermicon = theme_dir .. "/icons/temp.png"
 
 theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
+theme.arch_icon = theme_dir .. "/icons/arch.png"
 
 -- Define the icon theme for application icons. If not set then the icons 
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
