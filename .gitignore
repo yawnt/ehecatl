@@ -2,11 +2,10 @@
 *.swp
 !awesome
 !.Xresources
-!urxvt-perls/
+!urxvt-perls
 !.vimrc
 !heiwa.zoppo
 !.zopporc
 !.zshrc
-!.bin/
-.bin/lein
+!bin
 
