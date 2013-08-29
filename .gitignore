@@ -2,3 +2,4 @@
 *.swp
 !awesome
 !.Xresources
+!urxvt-perls

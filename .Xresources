@@ -1,13 +1,26 @@
 URxvt.font     : xft:Inconsolata:hinting=true:autohint=true:size=11
 URxvt.scrollBar: false
 URxvt.cursorUnderline:  true
+URxvt.urgentOnBell:  true
 
-URxvt.perl-ext-common: default,clipboard
+URxvt.perl-lib: /home/yawnt/.config/urxvt-perls
+
+URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
+URxvt.url-select.launcher:  dwb
+URxvt.url-select.underline: true
+URxvt.keysym.M-u:           perl:url-select:select_next
+
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+
+URxvt.keysym.M-c:   perl:clipboard:copy
+URxvt.keysym.M-v:   perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
 
 ! base16-default
 
 #define base00 #151515
-#define base01 #202020
+#define base01 #252525
 #define base02 #303030
 #define base03 #505050
 #define base04 #b0b0b0
