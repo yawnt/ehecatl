@@ -13,6 +13,7 @@ local menubar = require("menubar")
 local lines = require('lines')
 local vicious = require('vicious')
 local yawn = require('yawn')
+local common = require('common')
 
 local linesfg  = '#d0d0d0'
 local linesbg1 = '#313131'
@@ -138,7 +139,6 @@ for s = 1, screen.count() do
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", screen = s, height = 18 })
 
-
     local date   = lines:format('%b %d %R', linesfg, linesbg1)
     local cpu    = lines:format('$1%', linesfg, linesbg2)
     local mem    = lines:format('$1%', linesfg, linesbg1)
@@ -213,6 +213,15 @@ for s = 1, screen.count() do
 end
 -- }}}
 
+local botwibox = awful.wibox({ position = 'bottom', screen = 1, height = 18})
+local layout = wibox.layout.align.horizontal()
+
+layout:set_right(
+  wibox.widget.systray()
+)
+
+botwibox:set_widget(layout)
+
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
@@ -232,6 +241,14 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
+    awful.key({ modkey, "Control" }, "j", function()
+      awful.prompt.run(
+        {prompt = 'Jump to: '},
+        mypromptbox[mouse.screen].widget,
+        common.jumpto,
+        function() end
+      )
+    end),
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit)
 )
@@ -279,6 +296,10 @@ awful.rules.rules = {
                      buttons = clientbuttons } },
     { rule = { class = "Firefox" },
        properties = { tag = tags[1][2] } },
+    { rule = { class = "Ts3client_linux_amd64" },
+       properties = { tag = tags[2][1] } },
+    { rule = { class = "Skype" },
+       properties = { tag = tags[2][1] } }
 }
 -- }}}
 
@@ -353,4 +374,10 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+awful.util.spawn('xrdb /home/sandro/.Xdefaults')
+awful.util.spawn('chup firefox')
+awful.util.spawn('chup urxvt')
+awful.util.spawn('chup skype')
+awful.util.spawn('chup teamspeak3')
 -- }}}
