@@ -170,7 +170,6 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(wibox.widget.imagebox(beautiful.arch_icon))
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
 
@@ -196,7 +195,15 @@ for s = 1, screen.count() do
 
     right_layout:add(clockicon)
     right_layout:add(clock.widget)
-    
+
+    right_layout:add(lines:arrow(linebg2).widget) 
+
+    arch = wibox.widget.imagebox(beautiful.arch_icon)
+    archbg = wibox.widget.background()
+    archbg:set_bg(linebg1)
+    archbg:set_widget(arch)
+    right_layout:add(archbg)
+
     --if s == 1 then right_layout:add(systraywidget) end
     
     -- Now bring it all together (with the tasklist in the middle)
