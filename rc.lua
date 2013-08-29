@@ -10,6 +10,15 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+local lines = require('lines')
+local vicious = require('vicious')
+local yawn = require('yawn')
+
+local linesfg  = '#d0d0d0'
+local linesbg1 = '#313131'
+local linesbg2 = '#444444'
+
+yawn.register(717055)
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -127,10 +136,39 @@ for s = 1, screen.count() do
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s })
+    mywibox[s] = awful.wibox({ position = "top", screen = s, height = 18 })
 
-    local txtbox = wibox.widget.textbox()
-    txtbox:set_markup('<span color="blue" background="black">\xee\x82\xb2</span><span color="red" background="blue">yawngay</span><span color="red" background="blue">\xee\x82\xb2</span><span background="red">nexgay </span>')
+
+    local date   = lines:format('%b %d %R', linesfg, linesbg1)
+    local cpu    = lines:format('$1%', linesfg, linesbg2)
+    local mem    = lines:format('$1%', linesfg, linesbg1)
+    local fs     = lines:format('${/ used_gb}GB / ${/ avail_gb}GB', linesfg, linesbg2)
+    local weat   = lines:format('', linesfg, linesbg1)
+    local vol    = lines:format('$1%', linesfg, linesbg2)
+    local therm  = lines:format('$1°C', linesfg, linesbg1)
+
+    vicious.register(date.widget, vicious.widgets.date, date.markup, 60)
+    vicious.register(cpu.widget, vicious.widgets.cpu, cpu.markup, 60)
+    vicious.register(mem.widget, vicious.widgets.mem, mem.markup, 60)
+    vicious.register(fs.widget, vicious.widgets.fs, fs.markup, 60)
+    vicious.register(vol.widget, vicious.widgets.volume, vol.markup, 5, 'Master')
+    vicious.register(therm.widget, vicious.widgets.thermal, therm.markup, 60, {'coretemp.0', 'core'})
+
+    local dateimg  = lines:img(beautiful.dateicon, linesbg1)
+    local cpuimg   = lines:img(beautiful.cpuicon, linesbg2)
+    local memimg   = lines:img(beautiful.memicon, linesbg1)
+    local fsimg    = lines:img(beautiful.fsicon, linesbg2)
+    local weatimg  = lines:wrapimg(
+      yawn.icon,
+      linesbg1
+    )
+    local volimg   = lines:img(beautiful.volicon, linesbg2)
+    local thermimg = lines:img(beautiful.thermicon, linesbg1)
+
+    --naughty.notify({
+    --  text = lines:format('lel', 'green', 'black'):gsub('<', '&lt;'):gsub('>', '&gt;'),
+    --  timeout = 0
+    --})
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -139,10 +177,32 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    right_layout:add(txtbox)
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(mytextclock)
-    right_layout:add(mylayoutbox[s])
+
+    right_layout:add(
+      lines:arrow(beautiful.bg_normal).widget
+    )
+
+    right_layout:add(thermimg)
+    right_layout:add(therm.widget)
+
+    right_layout:add(volimg)
+    right_layout:add(vol.widget)
+
+    right_layout:add(weatimg)
+    right_layout:add(weat.widget)
+
+    right_layout:add(fsimg)
+    right_layout:add(fs.widget)
+
+    right_layout:add(memimg)
+    right_layout:add(mem.widget)
+
+    right_layout:add(cpuimg)
+    right_layout:add(cpu.widget)
+
+    right_layout:add(dateimg)
+    right_layout:add(date.widget)
+
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
@@ -201,6 +261,8 @@ clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize))
+
+globalkeys = awful.util.table.join(require('wmove').table(), globalkeys)
 
 -- Set keys
 root.keys(globalkeys)

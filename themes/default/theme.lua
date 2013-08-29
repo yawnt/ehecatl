@@ -22,6 +22,14 @@ theme.border_normal = "#000000"
 theme.border_focus  = "#535d6c"
 theme.border_marked = "#91231c"
 
+theme.dateicon   = '/home/sandro/.config/awesome/icons/multicolor/clock.png'
+theme.memicon    = '/home/sandro/.config/awesome/icons/multicolor/mem.png'
+theme.cpuicon    = '/home/sandro/.config/awesome/icons/multicolor/cpu.png'
+theme.fsicon     = '/home/sandro/.config/awesome/icons/multicolor/fs.png'
+theme.volicon    = '/home/sandro/.config/awesome/icons/multicolor/spkr.png'
+theme.thermicon  = '/home/sandro/.config/awesome/icons/multicolor/temp.png'
+
+
 -- There are other variable sets
 -- overriding the default one when
 -- defined, the sets are:
