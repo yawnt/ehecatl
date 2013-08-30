@@ -196,14 +196,16 @@ for s = 1, screen.count() do
     right_layout:add(clockicon)
     right_layout:add(clock.widget)
 
-    right_layout:add(lines:arrow(linebg2).widget) 
 
     arch = wibox.widget.imagebox(beautiful.arch_icon)
     archbg = wibox.widget.background()
+    archtx = wibox.widget.textbox()
+    archtx:set_markup('<span font="Inconsolata 18" background="' .. linebg1 .. '"> </span>')
     archbg:set_bg(linebg1)
     archbg:set_widget(arch)
+    right_layout:add(lines:arrow(linebg2).widget) 
     right_layout:add(archbg)
-
+    right_layout:add(archtx)
     --if s == 1 then right_layout:add(systraywidget) end
     
     -- Now bring it all together (with the tasklist in the middle)
