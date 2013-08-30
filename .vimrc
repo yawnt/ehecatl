@@ -41,9 +41,14 @@ Bundle 'chriskempson/base16-vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'vim-scripts/VimClojure'
 Bundle 'tpope/vim-commentary'
+Bundle 'scrooloose/nerdtree'
+
+"nerdtree hacks
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 "keymaps
 
+map <F4> :NERDTreeToggle<CR>
 nnoremap <F2> :tabnext<CR>
 nnoremap <F1> :tabprev<CR>
 nnoremap <F3> :tabnew<CR>
