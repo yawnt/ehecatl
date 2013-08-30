@@ -17,7 +17,6 @@ alias pacman="packer"
 setopt autocd
 
 # ssh
-eval $(ssh-agent)
-ssh-add ~/.ssh/id_rsa
+eval $(ssh-agent) > /dev/null
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
