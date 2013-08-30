@@ -97,7 +97,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "\xE2\x91\xA0", "\xE2\x91\xA1", "\xE2\x91\xA2", "\xE2\x91\xA3" }, s, layouts[1])
+    tags[s] = awful.tag({ "일", "이", "삼", "사" }, s, layouts[1])
 end
 -- }}}
 
