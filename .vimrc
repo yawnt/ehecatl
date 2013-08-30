@@ -48,10 +48,13 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 "keymaps
 
-map <F4> :NERDTreeToggle<CR>
 nnoremap <F2> :tabnext<CR>
 nnoremap <F1> :tabprev<CR>
 nnoremap <F3> :tabnew<CR>
+map <F4> :NERDTreeToggle<CR>
+
+nnoremap <F5> :set invpaste<CR>
+set pastetoggle=<F5>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
