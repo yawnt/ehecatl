@@ -9,6 +9,10 @@ lines = {
   bigfont = 'Inconsolata 14'
 }
 
+function lines:setlastbg(color)
+  lines.lastbg = color
+end
+
 function lines:arrow(bgcolor)
   local widget = wibox.widget.textbox()
   local txt =

@@ -107,12 +107,13 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Widgets
 -- Create a textclock widget
-clock = lines:format('%b %d %R', linefg, linebg2)
-cpu   = lines:format('$1%', linefg, linebg1)
-mem    = lines:format('$1%', linefg, linebg2)
-fs     = lines:format('${/ used_gb}GB / ${/ avail_gb}GB', linefg, linebg1)
-vol    = lines:format('$1%', linefg, linebg2)
-therm  = lines:format('$1°C', linefg, linebg1)
+clock = lines:format('%b %d %R', linefg, linebg1)
+cpu   = lines:format('$1%', linefg, linebg2)
+mem    = lines:format('$1%', linefg, linebg1)
+fs     = lines:format('${/ used_gb}GB / ${/ avail_gb}GB', linefg, linebg2)
+vol    = lines:format('$1%', linefg, linebg1)
+therm  = lines:format('$1°C', linefg, linebg2)
+bat    = lines:format('$2% $1', linefg, linebg1)
 
 vicious.register(mem.widget, vicious.widgets.mem, mem.markup, 60)
 vicious.register(fs.widget, vicious.widgets.fs, fs.markup, 60)
@@ -120,14 +121,16 @@ vicious.register(vol.widget, vicious.widgets.volume, vol.markup, 5, 'Master')
 vicious.register(therm.widget, vicious.widgets.thermal, therm.markup, 60, {'coretemp.0', 'core'})
 vicious.register(clock.widget, vicious.widgets.date, clock.markup, 60)
 vicious.register(cpu.widget, vicious.widgets.cpu, cpu.markup, 60)
+vicious.register(bat.widget, vicious.widgets.bat, bat.markup, 60, 'BAT0')
 
 -- Date Widget
-clockicon = lines:img(beautiful.clockicon, linebg2)
-cpuicon   = lines:img(beautiful.cpuicon, linebg1)
-memicon   = lines:img(beautiful.memicon, linebg2)
-fsicon    = lines:img(beautiful.fsicon, linebg1)
-volicon   = lines:img(beautiful.volicon, linebg2)
-thermicon = lines:img(beautiful.thermicon, linebg1)
+clockicon = lines:img(beautiful.clockicon, linebg1)
+cpuicon   = lines:img(beautiful.cpuicon, linebg2)
+memicon   = lines:img(beautiful.memicon, linebg1)
+fsicon    = lines:img(beautiful.fsicon, linebg2)
+volicon   = lines:img(beautiful.volicon, linebg1)
+thermicon = lines:img(beautiful.thermicon, linebg2)
+baticon   = lines:img(beautiful.baticon, linebg1)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -178,6 +181,9 @@ for s = 1, screen.count() do
     
     right_layout:add(lines:arrow(beautiful.bg_normal).widget) 
 
+    right_layout:add(baticon)
+    right_layout:add(bat.widget)
+
     right_layout:add(thermicon)
     right_layout:add(therm.widget)
 
@@ -199,14 +205,14 @@ for s = 1, screen.count() do
 
     arch = wibox.widget.imagebox(beautiful.arch_icon)
     archbg = wibox.widget.background()
-    archtx = wibox.widget.textbox()
-    archtx:set_markup('<span font="Inconsolata 18" background="' .. linebg1 .. '"> </span>')
-    archbg:set_bg(linebg1)
+    archla = wibox.layout.margin()
+    archla:set_right(3)
+    archbg:set_bg(linebg2)
     archbg:set_widget(arch)
-    right_layout:add(lines:arrow(linebg2).widget) 
-    right_layout:add(archbg)
-    right_layout:add(archtx)
-    --if s == 1 then right_layout:add(systraywidget) end
+    lines:setlastbg(linebg2)
+    archla:set_widget(archbg)
+    right_layout:add(lines:arrow('#505050').widget) 
+    right_layout:add(archla)
     
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()

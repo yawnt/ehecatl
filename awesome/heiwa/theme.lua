@@ -100,6 +100,7 @@ theme.memicon   = theme_dir .. "/icons/mem.png"
 theme.fsicon    = theme_dir .. "/icons/fs.png"
 theme.volicon   = theme_dir .. "/icons/spkr.png"
 theme.thermicon = theme_dir .. "/icons/temp.png"
+theme.baticon   = theme_dir .. "/icons/bat_full.png"
 
 theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
 theme.arch_icon = theme_dir .. "/icons/arch.png"
