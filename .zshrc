@@ -17,7 +17,4 @@ alias pdf="mupdf"
 # opts
 setopt autocd
 
-# ssh
-eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
-
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
