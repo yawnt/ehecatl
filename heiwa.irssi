@@ -133,7 +133,7 @@ abstracts = {
   ownprivnick = "%y$*";
 
   # private message in query
-  privmsgnick = "{msgnick  %Y$*%n}";
+  privmsgnick = "%K{msgnick  %B$*%K}%n";
 
   ##
   ## Actions (/ME stuff)

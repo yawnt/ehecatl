@@ -26,7 +26,7 @@ zstyle ':zoppo:*:*' case-sensitive 'no'
 zstyle ':zoppo:*:*' color 'yes'
 
 # plugins to load
-zstyle ':zoppo:load' plugins 'utility' 'completion' 'editor' 'history' 'archive' 'sudo' \
+zstyle ':zoppo:load' plugins 'agent' 'utility' 'completion' 'editor' 'history' 'archive' 'sudo' \
   'fasd' 'syntax-highlight' 'history-substring-search' # comment this line if the shell is too slow
 
 # sudo
