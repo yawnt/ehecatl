@@ -47,6 +47,11 @@ Bundle 'scrooloose/nerdtree'
 "nerdtree hacks
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+"vim-airline
+let g:airline_theme="base16"
+let g:airline_powerline_fonts=1
+
+
 "keymaps
 
 nnoremap <F2> :tabnext<CR>

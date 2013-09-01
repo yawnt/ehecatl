@@ -12,6 +12,7 @@ alias rbx="rbx-head"
 
 alias shot="scrot -d 3 shot.png; imgup shot.png; rm -f shot.png"
 alias pacman="packer"
+alias pdf="mupdf"
 
 # opts
 setopt autocd
