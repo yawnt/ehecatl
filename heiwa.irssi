@@ -112,7 +112,7 @@ abstracts = {
   #  privmsgnick = "%K{msgnick  %R$*%K}%n";
   # $0 = nick mode, $1 = nick
   ownmsgnick = "$1 %|%M";
-  ownnick = "%W<%N";
+  ownnick = "%g<%N";
   # public message in channel, $0 = nick mode, $1 = nick
   pubmsgnick = "$1 %K>%N %|";
   pubnick = "%N$*%N";
