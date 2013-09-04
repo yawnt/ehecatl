@@ -1,4 +1,4 @@
-.tabbrowser-tabs {
+er-tabs {
     border: none !important;
     background-color: #303030 !important;
 }
@@ -28,6 +28,11 @@
 }
 
 .tabbrowser-tab[pinned="true"]:hover {
+    background-color: #ac4142 !important;
+    border: none !important;
+}
+
+.tabbrowser-tab[pinned="true"][selected="true"] {
     background-color: #ac4142 !important;
     border: none !important;
 }
