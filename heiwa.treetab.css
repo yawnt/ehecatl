@@ -1,0 +1,45 @@
+.tabbrowser-tabs {
+    border: none !important;
+    background-color: #303030 !important;
+}
+
+.tab-text {
+    color: #D0D0D0 !important;
+}
+
+.tabbrowser-tab[selected="true"] {
+    background-color: #ac4142 !important;
+    border: none !important;
+}
+
+.tabbrowser-tab:hover {
+    background-color: #B0B0B0 !important
+    border: none !important;
+}
+
+.tabbrowser-tab:hover .tab-text {
+    color: #303030 !important;
+}
+
+
+.tabbrowser-tab[pinned="true"] {
+    background-color: #303030 !important;
+    border: none !important;
+}
+
+.tabbrowser-tab[pinned="true"]:hover {
+    background-color: #ac4142 !important;
+    border: none !important;
+}
+
+.treestyletab-tabbar-toolbar, .tabs-newtab-button {
+    background-color: #303030 !important;
+}
+
+.tabs-newtab-button:hover {
+    background-color: #B0B0B0 !important;
+}
+
+.tabs-newtab-button:hover .tab-text {
+    color: #303030 !important;
+}
