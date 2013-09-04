@@ -117,11 +117,11 @@ abstracts = {
   pubmsgnick = "$1 %K>%N %|";
   pubnick = "%N$*%N";
   # public message in channel meant for me, $0 = nick mode, $1 = nick
-  pubmsgmenick = "$1 %K!>%N %|";
+  pubmsgmenick = "$1 %R!>%N %|";
   menick = "%r%_$*%N";
   # public highlighted message in channel
   # $0 = highlight color, $1 = nick mode, $2 = nick
-  pubmsghinick = "%R%_$2- %_%M!>%N %|";
+  pubmsghinick = "%R%_$2- %_!>%N %|";
   # channel name is printed with message
   msgchannel = "%K:%c$*%N";
   # private message, $0 = nick, $1 = host

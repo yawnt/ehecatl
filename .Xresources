@@ -8,7 +8,7 @@ URxvt.urgentOnBell:  true
 URxvt.perl-lib: /home/yawnt/.config/urxvt-perls
 
 URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
-URxvt.url-select.launcher:  dwb
+URxvt.url-select.launcher:  firefox
 URxvt.url-select.underline: true
 URxvt.keysym.M-u:           perl:url-select:select_next
 
