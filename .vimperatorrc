@@ -1,1 +1,4 @@
+set gui='none,tabs'
+set hintchars='abcdefghijklmnopqrstuvwxyz'
+
 colorscheme heiwa
