@@ -13,6 +13,7 @@ alias rbx="rbx-head"
 alias shot="scrot -d 3 shot.png; imgup shot.png; rm -f shot.png"
 alias pacman="packer"
 alias pdf="mupdf"
+alias minecraft="java -jar ~/.minecraft/minecraft.jar"
 
 # opts
 setopt autocd

@@ -26,7 +26,7 @@ hi Indicator color #D0D0D0; background: #ac4142;
 hi Indicator        background: #303030;
 
 hi Hint         color: #D0D0D0 !important; background: #ac4142 !important; padding: 0 3px 2px 4px; margin-top: 1em;
-hi HintElem     color: #D0D0D0 !important; background: #303030 !important; !important;
+hi HintElem     background: transparent !important; !important;
 hi HintActive   color: #D0D0D0 !important; background: #ac4142 !important;
 
 hi StatusLine           color: #D0D0D0;   background: #303030;
