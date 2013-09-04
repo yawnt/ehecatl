@@ -1,0 +1,48 @@
+hi Enabled  color: darkgreen; background: #303030;
+hi Disabled color: red; background: #303030;
+
+hi Title    color: #D0D0D0; background: #ac4142;
+hi Normal   color: #D0D0D0; background: #303030;
+
+hi Help         color: #D0D0D0; background: #303030; font-family: Monospace;
+hi HelpArg      color: red;
+hi -a HelpHead  color: #ac4142;
+hi -a HelpEx    color: #ac4142 !important;
+hi -a HelpLink  color: red;
+
+hi ContentSeparator border-top: 1px solid #ac4142;
+
+hi CompTitle            color: #ac4142; background: #303030;
+hi CompDesc             color: gray;    background: #303030;
+hi CompGroup            color: red;     background: #303030;
+hi CompItem             color: #D0D0D0;   background: #303030;
+hi CompItem:nth-child(2n+1) color: #D0D0D0, background: #050505 !important;
+hi CompItem[selected]   color: #D0D0D0;   background: #ac4142 !important;
+hi CompIcon             color: #D0D0D0;   background: #303030;
+hi CompTitle>*          color: #D0D0D0;   background: #303030;
+
+hi Indicator color #D0D0D0; background: #ac4142;
+
+hi Indicator        background: #303030;
+
+hi Hint         color: #D0D0D0 !important; background: #ac4142 !important; padding: 0 3px 2px 4px; margin-top: 1em;
+hi HintElem     color: #D0D0D0 !important; background: #303030 !important; !important;
+hi HintActive   color: #D0D0D0 !important; background: #ac4142 !important;
+
+hi StatusLine           color: #D0D0D0;   background: #303030;
+
+hi CmdLine      color: #D0D0D0;   background: #303030;
+hi CmdOutput    color: #D0D0D0;   background: #303030;
+
+hi NonText      color: #D0D0D0;   background: #303030;
+
+hi ModeMsg      color: #D0D0D0;   background: #303030;
+hi ErrorMsg     color: #D0D0D0;   background: #ac4142;
+hi WarningMsg   color: #D0D0D0;   background: #ac4142;
+hi InfoMsg      color: #D0D0D0;   background: #303030; text-decoration: underline;
+hi MoreMsg      color: #D0D0D0;   background: #ac4142;
+
+hi LineNr       color: #ac4142; background: #303030;
+hi Question     color: #D0D0D0;   background: #303030;
+hi PromptText background: #ac4142; color: #D0D0D0;
+hi Filter background: transparent; border: 1px solid #ac4142; border-radius: 0;

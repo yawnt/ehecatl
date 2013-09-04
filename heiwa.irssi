@@ -129,10 +129,10 @@ abstracts = {
   # private message from you, $0 = "msg", $1 = target nick
   ownprivmsg = "%W%_$0%K(%W%_$1-%K)] %|%M";
   # own private message in query
-  ownprivmsgnick = "%N%M< %N";
-  ownprivnick = "%N%M<";
+  ownprivmsgnick = "%N%g< %N";
+  ownprivnick = "%N%g<";
   # private message in query
-  privmsgnick = "$0$1%W> %M";
+  privmsgnick = "%r> %M";
   ##
   ## Actions (/ME stuff)
   ##
