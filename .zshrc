@@ -18,3 +18,4 @@ alias pdf="mupdf"
 setopt autocd
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:$HOME/.gem/ruby/2.0.0/bin
