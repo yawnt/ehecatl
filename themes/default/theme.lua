@@ -22,12 +22,13 @@ theme.border_normal = "#000000"
 theme.border_focus  = "#535d6c"
 theme.border_marked = "#91231c"
 
-theme.dateicon   = '/home/sandro/.config/awesome/icons/multicolor/clock.png'
-theme.memicon    = '/home/sandro/.config/awesome/icons/multicolor/mem.png'
-theme.cpuicon    = '/home/sandro/.config/awesome/icons/multicolor/cpu.png'
-theme.fsicon     = '/home/sandro/.config/awesome/icons/multicolor/fs.png'
-theme.volicon    = '/home/sandro/.config/awesome/icons/multicolor/spkr.png'
-theme.thermicon  = '/home/sandro/.config/awesome/icons/multicolor/temp.png'
+theme.dateicon      = '/home/sandro/.config/awesome/icons/multicolor/clock.png'
+theme.memicon       = '/home/sandro/.config/awesome/icons/multicolor/mem.png'
+theme.cpuicon       = '/home/sandro/.config/awesome/icons/multicolor/cpu.png'
+theme.fsicon        = '/home/sandro/.config/awesome/icons/multicolor/fs.png'
+theme.musicicon     = '/home/sandro/.config/awesome/icons/multicolor/note.png'
+theme.volicon       = '/home/sandro/.config/awesome/icons/multicolor/spkr.png'
+theme.thermicon     = '/home/sandro/.config/awesome/icons/multicolor/temp.png'
 
 
 -- There are other variable sets
@@ -80,7 +81,7 @@ theme.titlebar_maximized_button_focus_inactive  = "/home/sandro/.config/awesome/
 theme.titlebar_maximized_button_normal_active = "/home/sandro/.config/awesome/themes/default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = "/home/sandro/.config/awesome/themes/default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = "/home/sandro/.config/awesome/themes/default/background.png"
+theme.wallpaper = "/home/sandro/.config/awesome/themes/default/od.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = "/home/sandro/.config/awesome/themes/default/layouts/fairhw.png"

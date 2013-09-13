@@ -14,6 +14,7 @@ local lines = require('lines')
 local vicious = require('vicious')
 local yawn = require('yawn')
 local common = require('common')
+local mocp = require('mocp')
 
 local linesfg  = '#d0d0d0'
 local linesbg1 = '#313131'
@@ -146,6 +147,7 @@ for s = 1, screen.count() do
     local weat   = lines:format('', linesfg, linesbg1)
     local vol    = lines:format('$1%', linesfg, linesbg2)
     local therm  = lines:format('$1°C', linesfg, linesbg1)
+    local music  = nil
 
     vicious.register(date.widget, vicious.widgets.date, date.markup, 60)
     vicious.register(cpu.widget, vicious.widgets.cpu, cpu.markup, 60)
@@ -153,6 +155,8 @@ for s = 1, screen.count() do
     vicious.register(fs.widget, vicious.widgets.fs, fs.markup, 60)
     vicious.register(vol.widget, vicious.widgets.volume, vol.markup, 5, 'Master')
     vicious.register(therm.widget, vicious.widgets.thermal, therm.markup, 60, {'coretemp.0', 'core'})
+
+
 
     local dateimg  = lines:img(beautiful.dateicon, linesbg1)
     local cpuimg   = lines:img(beautiful.cpuicon, linesbg2)
@@ -164,6 +168,7 @@ for s = 1, screen.count() do
     )
     local volimg   = lines:img(beautiful.volicon, linesbg2)
     local thermimg = lines:img(beautiful.thermicon, linesbg1)
+    local musicimg = nil
 
     --naughty.notify({
     --  text = lines:format('lel', 'green', 'black'):gsub('<', '&lt;'):gsub('>', '&gt;'),
@@ -177,6 +182,8 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
+
+    common.layoutpatch(right_layout)
 
     right_layout:add(
       lines:arrow(beautiful.bg_normal).widget
@@ -203,6 +210,48 @@ for s = 1, screen.count() do
     right_layout:add(dateimg)
     right_layout:add(date.widget)
 
+    local moctimer = timer({ timeout = 5 })
+
+    moctimer:connect_signal("timeout", function()
+--      naughty.notify({
+--        text = mocp:playing() and "true" or "false",
+--        timeout = 0
+--      })
+
+      if mocp:playing() and not music then
+        music = lines:format(
+          mocp:format(),
+          linesfg,
+          linesbg2
+        )
+
+        musicimg = lines:img(beautiful.musicicon, linesbg2)
+
+        right_layout:shift()
+        right_layout:unshift(music.widget)
+        right_layout:unshift(musicimg)
+
+        right_layout:unshift(
+          lines:arrow(beautiful.bg_normal).widget
+        )
+      elseif not mocp:playing() and music then
+        right_layout:shift() -- last arrow
+        right_layout:shift() -- icon
+        right_layout:shift() -- text
+        right_layout:shift() -- arrow
+
+        lines:setlastbg(linesbg1)
+
+        right_layout:unshift(thermimg)
+        right_layout:unshift(
+          lines:arrow(beautiful.bg_normal).widget
+        )
+
+        music = nil
+      end
+    end)
+
+    moctimer:start()
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
@@ -376,6 +425,7 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
 awful.util.spawn('xrdb /home/sandro/.Xdefaults')
+awful.util.spawn('xmodmap /home/sandro/.Xmodmap')
 awful.util.spawn('chup firefox')
 awful.util.spawn('chup urxvt')
 awful.util.spawn('chup skype')

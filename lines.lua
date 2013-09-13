@@ -9,6 +9,10 @@ lines = {
   bigfont = 'Terminess Powerline 14'
 }
 
+function lines:setlastbg(color)
+  self.lastbg = color
+end
+
 function lines:arrow(bgcolor)
   local widget = wibox.widget.textbox()
   local txt =
