@@ -19,7 +19,7 @@ theme.fg_minimize   = "#ffffff"
 
 theme.border_width  = 1
 theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
+theme.border_focus  = "#505050"
 theme.border_marked = "#91231c"
 
 theme.dateicon      = '/home/sandro/.config/awesome/icons/multicolor/clock.png'
@@ -29,6 +29,7 @@ theme.fsicon        = '/home/sandro/.config/awesome/icons/multicolor/fs.png'
 theme.musicicon     = '/home/sandro/.config/awesome/icons/multicolor/note.png'
 theme.volicon       = '/home/sandro/.config/awesome/icons/multicolor/spkr.png'
 theme.thermicon     = '/home/sandro/.config/awesome/icons/multicolor/temp.png'
+
 theme.useless_gap_width = "5"
 
 -- There are other variable sets
