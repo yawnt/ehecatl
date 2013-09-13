@@ -29,7 +29,7 @@ theme.fsicon        = '/home/sandro/.config/awesome/icons/multicolor/fs.png'
 theme.musicicon     = '/home/sandro/.config/awesome/icons/multicolor/note.png'
 theme.volicon       = '/home/sandro/.config/awesome/icons/multicolor/spkr.png'
 theme.thermicon     = '/home/sandro/.config/awesome/icons/multicolor/temp.png'
-
+theme.useless_gap_width = "5"
 
 -- There are other variable sets
 -- overriding the default one when
