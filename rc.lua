@@ -215,6 +215,7 @@ for s = 1, screen.count() do
     right_layout:add(date.widget)
 
     local moctimer = timer({ timeout = 5 })
+    local last = nil
 
     moctimer:connect_signal("timeout", function()
 --      naughty.notify({
@@ -238,7 +239,7 @@ for s = 1, screen.count() do
         right_layout:unshift(
           lines:arrow(beautiful.bg_normal).widget
         )
-      elseif not mocp:playing() and music then
+      elseif not mocp:playing() and music or last ~= mocp:format() then -- not playing or song name changed
         right_layout:shift() -- last arrow
         right_layout:shift() -- icon
         right_layout:shift() -- text
@@ -253,6 +254,8 @@ for s = 1, screen.count() do
 
         music = nil
       end
+
+      last = mocp:format()
     end)
 
     moctimer:start()
@@ -352,7 +355,12 @@ awful.rules.rules = {
     { rule = { class = "Ts3client_linux_amd64" },
        properties = { tag = tags[2][1] } },
     { rule = { class = "Skype" },
-       properties = { tag = tags[2][1] } }
+       properties = { tag = tags[2][1] } },
+    { rule = { class = "dota_linux" },
+       properties = { tag = tags[1][3] } },
+    { rule = { class = "Steam" },
+       properties = { tag = tags[1][3] } }
+
 }
 -- }}}
 
