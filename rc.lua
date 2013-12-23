@@ -218,10 +218,10 @@ for s = 1, screen.count() do
     local last = nil
 
     moctimer:connect_signal("timeout", function()
-      naughty.notify({
-        text = mocp:playing() and "true" or "false",
-        timeout = 0
-      })
+      -- naughty.notify({
+      -- text = mocp:playing() and "true" or "false",
+      --  timeout = 0
+      -- })
 
       if mocp:playing() and not music then
         music = lines:format(
@@ -240,11 +240,6 @@ for s = 1, screen.count() do
           lines:arrow(beautiful.bg_normal).widget
         )
       elseif not mocp:playing() and music or last ~= mocp:format() and mocp:playing() then -- not playing or song name changed
-        naughty.notify({
-          text = last,
-          timeout = 0
-        })
-
         right_layout:shift() -- last arrow
         right_layout:shift() -- icon
         right_layout:shift() -- text
