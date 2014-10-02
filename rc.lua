@@ -96,7 +96,7 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-  awful.tag({ 1, 2, 3, 4, 5 }, 1, {lain.layout.uselesstile.top, layouts[11], layouts[1], layouts[1], layouts[1]}),
+  awful.tag({ 1, 2, 3, 4, 5 }, 1, {lain.layout.uselesstile.top, layouts[11], lain.layout.uselesstile.top, layouts[1], layouts[1]}),
   awful.tag({ 'IM' }, 2, layouts[11])
 }
 -- }}}
