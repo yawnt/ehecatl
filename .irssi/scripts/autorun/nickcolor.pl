@@ -1,0 +1,1 @@
+/home/yawnt/Code/bash/.config/.irssi/scripts/nickcolor.pl
