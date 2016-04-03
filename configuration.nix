@@ -44,9 +44,9 @@ rec {
     fira-code
     kde5.konsole
     opam
-    merlin
-    ocp-indent
-    oasis
+    ocamlPackages.merlin
+    ocamlPackages.ocpIndent
+    ocamlPackages.ocaml_oasis
     sbt
     leiningen
   ];
@@ -110,3 +110,4 @@ rec {
     ln -fs ${./dotfiles/local/share/konsole} $USER_HOME/.local/share/
     '';
 }
+
