@@ -3,9 +3,8 @@
 { config, pkgs, ... }:
 
 let hostName = "${builtins.readFile ./hostname}";
-    home = /home/yawnt;
 in
-{
+rec {
   imports =
     [
       ./hardware-configuration.nix
@@ -41,6 +40,7 @@ in
     extraGroups = [ "wheel" ];
     useDefaultShell = true;
     initialPassword = "password";
+    home = /home/yawnt;
   };
 
 
@@ -64,22 +64,24 @@ in
 
   system.activationScripts.dotfiles = stringAfter [ "users" ]
     ''
+    export USER_HOME=${users.extraUsers.yawnt.home}
+
     # Emacs
-    ln -fs ${./dotfiles/.emacs.d} ${home}/.emacs.d
+    ln -fs ${./dotfiles/.emacs.d} $USER_HOME/.emacs.d
 
     # Zoppo
-    ln -fs ${./dotfiles/.zoppo} ${home}/.zoppo
-    ln -fs ${./dotfiles/.zopporc} ${home}/.zopporc
-    ln -fs ${./dotfiles/.zshenv} ${home}/.zshenv
+    ln -fs ${./dotfiles/.zoppo} $USER_HOME/.zoppo
+    ln -fs ${./dotfiles/.zopporc} $USER_HOME/.zopporc
+    ln -fs ${./dotfiles/.zshenv} $USER_HOME/.zshenv
 
     # Irssi
-    ln -fs ${./dotfiles/.irssi} ${home}/.irssi
+    ln -fs ${./dotfiles/.irssi} $USER_HOME/.irssi
 
     # Tmux
-    ln -fs ${./dotfiles/.tmux.conf} ${home}/.tmux.conf
+    ln -fs ${./dotfiles/.tmux.conf} $USER_HOME/.tmux.conf
 
     # Konsole
-    mkdir -p ${home}/.local/share/
-    ln -fs ${./dotfiles/.local/share/konsole} ${home}/.local/share/konsole
+    mkdir -p $USER_HOME/.local/share/
+    ln -fs ${./dotfiles/.local/share/konsole} $USER_HOME/.local/share/konsole
     '';
 }
