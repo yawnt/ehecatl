@@ -32,6 +32,10 @@ rec {
     emacs
     sudo
     zsh
+    tmux
+    irssi
+    kde5.konsole
+    fira-code
   ];
 
   programs.zsh.enable = true;
@@ -68,22 +72,23 @@ rec {
     export USER_HOME=/home/yawnt
 
     # Emacs
-    ln -fs ${./dotfiles/emacs.d} $USER_HOME/.emacs.d
+    ln -fsn ${./dotfiles/emacs.d} $USER_HOME/.emacs.d
 
     # Zoppo + ZSH
-    ln -fs ${./dotfiles/zoppo} $USER_HOME/.zoppo
+    ln -fsn ${./dotfiles/zoppo} $USER_HOME/.zoppo
     ln -fs ${./dotfiles/zshrc} $USER_HOME/.zshrc
     ln -fs ${./dotfiles/zopporc} $USER_HOME/.zopporc
     ln -fs ${./dotfiles/zshenv} $USER_HOME/.zshenv
 
     # Irssi
-    ln -fs ${./dotfiles/irssi} $USER_HOME/.irssi
+    ln -fsn ${./dotfiles/irssi} $USER_HOME/.irssi
 
     # Tmux
     ln -fs ${./dotfiles/tmux.conf} $USER_HOME/.tmux.conf
 
     # Konsole
     mkdir -p $USER_HOME/.local/share/
-    ln -fs ${./dotfiles/local/share/konsole} $USER_HOME/.local/share/konsole
+    ln -fs ${./dotfiles/local/share/konsole} $USER_HOME/.local/share/
     '';
 }
+
