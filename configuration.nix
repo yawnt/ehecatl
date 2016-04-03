@@ -1,5 +1,3 @@
-# yawnt's laptop
-
 { config, lib, pkgs, ... }:
 
 with lib;
