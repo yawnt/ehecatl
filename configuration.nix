@@ -2,9 +2,11 @@
 
 { config, pkgs, ... }:
 
+let hostName = "${builtins.readFile ./hostname}"
+in
 {
   imports =
-    [ 
+    [
       ./hardware-configuration.nix
     ];
 
@@ -14,8 +16,8 @@
     device = "/dev/sda";
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
-  
+  networking.hostName = "${hostName}";
+
   i18n = {
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "us";
@@ -24,20 +26,20 @@
 
   time.timeZone = "Europe/Rome";
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     wget
     emacs
     sudo
     zsh
   ];
+
   programs.zsh.enable = true;
-  
+
   users.extraUsers.yawnt = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     useDefaultShell = true;
+    initialPassword = "password";
   };
 
 
@@ -54,9 +56,8 @@
   };
 
   boot.initrd.luks.devices = [
-    { 
+    {
       name = "root"; device = "/dev/sda2"; preLVM = true;
     }
   ];
 }
-
