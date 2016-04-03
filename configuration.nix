@@ -36,6 +36,7 @@ rec {
     irssi
     kde5.konsole
     fira-code
+    opam
   ];
 
   programs.zsh.enable = true;
@@ -45,7 +46,8 @@ rec {
     extraGroups = [ "wheel" ];
     useDefaultShell = true;
     initialPassword = "password";
-    #home = /home/yawnt;
+    home = "/home/yawnt";
+    shell = "/run/current-system/sw/bin/zsh";
   };
 
 
@@ -69,10 +71,14 @@ rec {
 
   system.activationScripts.dotfiles = stringAfter [ "users" ]
     ''
-    export USER_HOME=/home/yawnt
+    export USER_HOME=${users.extraUsers.yawnt.home}
 
     # Emacs
-    ln -fsn ${./dotfiles/emacs.d} $USER_HOME/.emacs.d
+    rm -rf $USER_HOME/.emacs.d
+    cp -r ${./dotfiles/emacs.d} $USER_HOME/.emacs.d
+    chown -R yawnt:users $USER_HOME/.emacs.d
+    chmod -R 755 $USER_HOME/.emacs.d
+    #ln -fsn ${./dotfiles/emacs.d} $USER_HOME/.emacs.d
 
     # Zoppo + ZSH
     ln -fsn ${./dotfiles/zoppo} $USER_HOME/.zoppo
