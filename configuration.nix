@@ -95,6 +95,8 @@ rec {
     # Konsole
     mkdir -p $USER_HOME/.local/share/
     ln -fs ${./dotfiles/local/share/konsole} $USER_HOME/.local/share/
+
+    # Opam
+    opam init --no-setup -y
     '';
 }
-
