@@ -2,7 +2,7 @@
 
 { config, pkgs, ... }:
 
-let hostName = "${builtins.readFile ./hostname}"
+let hostName = "${builtins.readFile ./hostname}";
 in
 {
   imports =
