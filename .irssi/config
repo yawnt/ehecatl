@@ -1,0 +1,8 @@
+settings = {
+  core = {
+    real_name = "yawnt";
+    user_name = "yawnt";
+    nick = "yawnt";
+  };
+  "fe-common/core" = { theme = "heiwa"; };
+};
