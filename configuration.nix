@@ -29,6 +29,7 @@ rec {
 
   environment.systemPackages = with pkgs; [
     wget
+    curl
     emacs
     sudo
     zsh
@@ -78,7 +79,8 @@ rec {
     cp -r ${./dotfiles/emacs.d} $USER_HOME/.emacs.d
     chown -R yawnt:users $USER_HOME/.emacs.d
     chmod -R 755 $USER_HOME/.emacs.d
-    #ln -fsn ${./dotfiles/emacs.d} $USER_HOME/.emacs.d
+    # Prelude required a writable directory, we can't use
+    # ln -fsn ${./dotfiles/emacs.d} $USER_HOME/.emacs.d
 
     # Zoppo + ZSH
     ln -fsn ${./dotfiles/zoppo} $USER_HOME/.zoppo
@@ -95,8 +97,5 @@ rec {
     # Konsole
     mkdir -p $USER_HOME/.local/share/
     ln -fs ${./dotfiles/local/share/konsole} $USER_HOME/.local/share/
-
-    # Opam
-    su - yawnt -c "opam init --no-setup -y"
     '';
 }
