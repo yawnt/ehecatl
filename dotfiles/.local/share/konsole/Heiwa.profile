@@ -1,5 +1,5 @@
 [Appearance]
-ColorScheme=base16-eighties
+ColorScheme=heiwa
 Font=Fira Code,11,-1,5,25,0,0,0,0,0
 
 [General]
