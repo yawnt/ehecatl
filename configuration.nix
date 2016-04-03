@@ -3,6 +3,7 @@
 { config, pkgs, ... }:
 
 let hostName = "${builtins.readFile ./hostname}";
+    home = /home/yawnt;
 in
 {
   imports =
@@ -60,4 +61,25 @@ in
       name = "root"; device = "/dev/sda2"; preLVM = true;
     }
   ];
+
+  system.activationScripts.dotfiles = stringAfter [ "users" ]
+    ''
+    # Emacs
+    ln -fs ${./dotfiles/.emacs.d} ${home}/.emacs.d
+
+    # Zoppo
+    ln -fs ${./dotfiles/.zoppo} ${home}/.zoppo
+    ln -fs ${./dotfiles/.zopporc} ${home}/.zopporc
+    ln -fs ${./dotfiles/.zshenv} ${home}/.zshenv
+
+    # Irssi
+    ln -fs ${./dotfiles/.irssi} ${home}/.irssi
+
+    # Tmux
+    ln -fs ${./dotfiles/.tmux.conf} ${home}/.tmux.conf
+
+    # Konsole
+    mkdir -p ${home}/.local/share/
+    ln -fs ${./dotfiles/.local/share/konsole} ${home}/.local/share/konsole
+    ''
 }
