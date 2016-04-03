@@ -4,4 +4,4 @@
 	branch = default
 [submodule "dotfiles/emacs.d"]
 	path = dotfiles/emacs.d
-	url = git@github.com:yawnt/.emacs.d.git
+	url = https://github.com/yawnt/.emacs.d.git
