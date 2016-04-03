@@ -11,6 +11,14 @@ rec {
       ./hardware-configuration.nix
     ];
 
+  nixpkgs.config = {
+    allowUnfree = true;
+    packageOverrides = pkgs : {
+      sbt = pkgs.sbt.override { jre = pkgs.oraclejre8; };
+      leiningen = pkgs.leiningen.override { jdk = pkgs.oraclejdk8; };
+    };
+  };
+
   boot.loader.grub = {
     enable = true;
     version = 2;
@@ -41,6 +49,8 @@ rec {
     merlin
     ocp-indent
     oasis
+    sbt
+    leiningen
   ];
 
   programs.zsh.enable = true;
