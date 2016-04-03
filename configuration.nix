@@ -41,7 +41,7 @@ rec {
     extraGroups = [ "wheel" ];
     useDefaultShell = true;
     initialPassword = "password";
-    home = /home/yawnt;
+    #home = /home/yawnt;
   };
 
 
@@ -65,24 +65,25 @@ rec {
 
   system.activationScripts.dotfiles = stringAfter [ "users" ]
     ''
-    export USER_HOME=${users.extraUsers.yawnt.home}
+    export USER_HOME=/home/yawnt
 
     # Emacs
-    ln -fs ${./dotfiles/.emacs.d} $USER_HOME/.emacs.d
+    ln -fs ${./dotfiles/emacs.d} $USER_HOME/.emacs.d
 
-    # Zoppo
-    ln -fs ${./dotfiles/.zoppo} $USER_HOME/.zoppo
-    ln -fs ${./dotfiles/.zopporc} $USER_HOME/.zopporc
-    ln -fs ${./dotfiles/.zshenv} $USER_HOME/.zshenv
+    # Zoppo + ZSH
+    ln -fs ${./dotfiles/zoppo} $USER_HOME/.zoppo
+    ln -fs ${./dotfiles/zshrc} $USER_HOME/.zshrc
+    ln -fs ${./dotfiles/zopporc} $USER_HOME/.zopporc
+    ln -fs ${./dotfiles/zshenv} $USER_HOME/.zshenv
 
     # Irssi
-    ln -fs ${./dotfiles/.irssi} $USER_HOME/.irssi
+    ln -fs ${./dotfiles/irssi} $USER_HOME/.irssi
 
     # Tmux
-    ln -fs ${./dotfiles/.tmux.conf} $USER_HOME/.tmux.conf
+    ln -fs ${./dotfiles/tmux.conf} $USER_HOME/.tmux.conf
 
     # Konsole
     mkdir -p $USER_HOME/.local/share/
-    ln -fs ${./dotfiles/.local/share/konsole} $USER_HOME/.local/share/konsole
+    ln -fs ${./dotfiles/local/share/konsole} $USER_HOME/.local/share/konsole
     '';
 }
