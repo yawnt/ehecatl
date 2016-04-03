@@ -81,5 +81,5 @@ in
     # Konsole
     mkdir -p ${home}/.local/share/
     ln -fs ${./dotfiles/.local/share/konsole} ${home}/.local/share/konsole
-    ''
+    '';
 }
