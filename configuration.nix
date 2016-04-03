@@ -1,7 +1,8 @@
 # yawnt's laptop
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
+with lib;
 let hostName = "${builtins.readFile ./hostname}";
 in
 rec {
