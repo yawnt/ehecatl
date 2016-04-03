@@ -35,9 +35,12 @@ rec {
     zsh
     tmux
     irssi
-    kde5.konsole
     fira-code
+    kde5.konsole
     opam
+    merlin
+    ocp-indent
+    oasis
   ];
 
   programs.zsh.enable = true;
