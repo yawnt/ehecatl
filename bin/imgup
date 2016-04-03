@@ -1,2 +1,0 @@
-#!/usr/bin/env zsh
-curl -s -F image=@$1 http://imm.io/store/ | jq -r ".payload.uri"

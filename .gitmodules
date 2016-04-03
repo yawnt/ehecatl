@@ -1,6 +1,4 @@
-[submodule "urxvt-perls"]
-	path = urxvt-perls
-	url = https://github.com/muennich/urxvt-perls.git
-[submodule "awesome/vicious"]
-	path = awesome/vicious
-	url = http://git.sysphere.org/vicious
+[submodule ".zoppo"]
+	path = .zoppo
+	url = https://github.com/zoppo/zoppo.git
+	branch = default
