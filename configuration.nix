@@ -97,6 +97,6 @@ rec {
     ln -fs ${./dotfiles/local/share/konsole} $USER_HOME/.local/share/
 
     # Opam
-    opam init --no-setup -y
+    su - yawnt -c "opam init --no-setup -y"
     '';
 }
