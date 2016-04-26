@@ -17,12 +17,8 @@ rec {
     };
   };
 
-  boot.loader.grub = {
-    enable = true;
-    version = 2;
-    device = "/dev/sda";
-  };
-
+  boot.loader.gummiboot.enable = true;
+  
   networking.hostName = "${hostName}";
 
   i18n = {
@@ -44,9 +40,12 @@ rec {
     fira-code
     kde5.konsole
     opam
+    git
     ocamlPackages.merlin
     ocamlPackages.ocpIndent
     ocamlPackages.ocaml_oasis
+    chromium
+    xsel
     sbt
     leiningen
   ];
@@ -73,11 +72,13 @@ rec {
     desktopManager.gnome3.enable = true;
     displayManager.gdm.enable = true;
     xkbOptions = "eurosign:e";
+    synaptics.enable = true;
+    videoDrivers = ["intel"];
   };
 
   boot.initrd.luks.devices = [
     {
-      name = "root"; device = "/dev/sda2"; preLVM = true;
+      name = "root"; device = "/dev/nvme0n1p5"; preLVM = true;
     }
   ];
 
@@ -106,8 +107,9 @@ rec {
     ln -fs ${./dotfiles/tmux.conf} $USER_HOME/.tmux.conf
 
     # Konsole
+    rm -rf $USER_HOME/.local/share/konsole
     mkdir -p $USER_HOME/.local/share/
-    ln -fs ${./dotfiles/local/share/konsole} $USER_HOME/.local/share/
+    ln -fs ${./dotfiles/local/share/konsole} $USER_HOME/.local/share/konsole
     '';
 }
 
