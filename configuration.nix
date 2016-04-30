@@ -2,6 +2,15 @@
 
 with lib;
 let hostName = "${builtins.readFile ./hostname}";
+    default = ./default.el;
+    tmpInit = ./tmpInit.el;
+    tmpCompile = ./tmpCompile.el;
+    yawntEmacs = ./yawnt.el;
+    prelude = pkgs.fetchgit {
+      url = https://github.com/bbatsov/prelude.git;
+      rev = "2b85871805526261b6c3600a4fd103538ebee96f";
+      sha256 = "1vl7v3gks78r4k9dzhhzhlkwqjaxmv13pd9zv1hz0d3k84mryc3c";
+    };
 in
 rec {
   imports =
@@ -11,14 +20,29 @@ rec {
 
   nixpkgs.config = {
     allowUnfree = true;
-    packageOverrides = pkgs : {
+    packageOverrides = pkgs : rec {
       sbt = pkgs.sbt.override { jre = pkgs.oraclejre8; };
-      leiningen = pkgs.leiningen.override { jdk = pkgs.oraclejdk8; };
+      leiningen = pkgs.leiningen.override { jdk = pkgs.oraclejdk8; };                                                                                 
+      apacheKafka = pkgs.apacheKafka.override { jre = pkgs.oraclejre8; };
+      emacs = pkgs.emacs.overrideDerivation (drv : {
+        postInstall = drv.postInstall + ''
+          cp -r ${prelude} $out/share/emacs/site-lisp/prelude
+          chmod -R a+w $out/share/emacs/site-lisp/
+          cp ${yawntEmacs} $out/share/emacs/site-lisp/prelude/personal/yawnt.el
+          $out/bin/emacs -batch -l ${tmpInit}
+          $out/bin/emacs -batch -l ${tmpCompile}
+          cp ${default} $out/share/emacs/site-lisp/default.el
+          chmod a+w $out/share/emacs/site-lisp/default.el
+          echo "(load (expand-file-name \"init.el\" \"$out/share/emacs/site-lisp/prelude\"))" >> $out/share/emacs/site-lisp/default.el
+        '';
+      });
     };
   };
 
+  #environment.etc."nix/nixpkgs-config.nix".text = "(import <nixpkgs/nixos> {}).config.nixpkgs.config";
+
   boot.loader.gummiboot.enable = true;
-  
+
   networking.hostName = "${hostName}";
 
   i18n = {
@@ -48,13 +72,30 @@ rec {
     xsel
     sbt
     leiningen
+    powertop
+    meld
+    gnome3.gnome-tweak-tool
+    unzip
+    openvpn
+    mpv
+    cutegram
+    ncmpc
+    apacheKafka
+    rdkafka
+    gcc
+    autoconf
+    automake
+    inkscape
+    nix-prefetch-scripts
+    python27Packages.docker_compose
+    networkmanagerapplet
   ];
 
   programs.zsh.enable = true;
 
   users.extraUsers.yawnt = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "docker" ];
     useDefaultShell = true;
     initialPassword = "password";
     home = "/home/yawnt";
@@ -67,13 +108,39 @@ rec {
     channel = https://nixos.org/channels/nixos-unstable;
   };
 
-  services.xserver = {
+  services = {
+    xserver = {
+      enable = true;
+      desktopManager.gnome3 = {
+        enable = true;
+        extraGSettingsOverrides = ''
+          [org.gnome.desktop.interface]
+          scaling-factor=2
+        '';
+      };
+      displayManager.gdm.enable = true;
+      xkbOptions = "eurosign:e";
+      synaptics = {
+        enable = true;
+        minSpeed = "0.8";
+        maxSpeed = "0.8";
+        accelFactor = "0.03";
+      };
+      videoDrivers = ["intel"];
+    };
+    mpd.enable = true;
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresql94;
+      authentication = "local all all ident";
+    };
+  };
+
+  virtualisation.docker = {
     enable = true;
-    desktopManager.gnome3.enable = true;
-    displayManager.gdm.enable = true;
-    xkbOptions = "eurosign:e";
-    synaptics.enable = true;
-    videoDrivers = ["intel"];
+    extraOptions = ''
+
+    '';
   };
 
   boot.initrd.luks.devices = [
@@ -85,14 +152,6 @@ rec {
   system.activationScripts.dotfiles = stringAfter [ "users" ]
     ''
     export USER_HOME=${users.extraUsers.yawnt.home}
-
-    # Emacs
-    rm -rf $USER_HOME/.emacs.d
-    cp -r ${./dotfiles/emacs.d} $USER_HOME/.emacs.d
-    chown -R yawnt:users $USER_HOME/.emacs.d
-    chmod -R 755 $USER_HOME/.emacs.d
-    # Prelude required a writable directory, we can't use
-    # ln -fsn ${./dotfiles/emacs.d} $USER_HOME/.emacs.d
 
     # Zoppo + ZSH
     ln -fsn ${./dotfiles/zoppo} $USER_HOME/.zoppo
@@ -112,4 +171,3 @@ rec {
     ln -fs ${./dotfiles/local/share/konsole} $USER_HOME/.local/share/konsole
     '';
 }
-
