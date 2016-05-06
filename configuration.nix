@@ -184,7 +184,7 @@ rec {
 
   virtualisation.docker = {
     enable = true;
-    extraOptions = dockerCfg;
+    extraOptions = "${dockerCfg}";
   };
 
   boot.initrd.luks.devices = [
