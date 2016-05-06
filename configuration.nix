@@ -25,4 +25,6 @@ rec {
     channel = https://nixos.org/channels/nixos-unstable;
   };
 
+  nix.gc.automatic = true;
+  nix.gc.dates = "13:15";
 }

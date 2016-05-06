@@ -26,6 +26,10 @@
     ocamlPackages.ocpIndent
     ocamlPackages.ocaml_oasis
 
+    # Haskell
+    ghc
+    stack
+
     # Big Data
     apacheKafka
     rdkafka
