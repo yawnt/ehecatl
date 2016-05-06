@@ -1,10 +1,10 @@
 emacs: fetchgit:
 
 let
-  default = ./default.el;
-  tmpInit = ./tmpInit.el;
-  tmpCompile = ./tmpCompile.el;
-  yawntEmacs = ./yawnt.el;
+  default = ./emacslisp/default.el;
+  tmpInit = ./emacslisp/tmpInit.el;
+  tmpCompile = ./emacslisp/tmpCompile.el;
+  yawntEmacs = ./emacslisp/yawnt.el;
   prelude = fetchgit {
     url = https://github.com/bbatsov/prelude.git;
     rev = "2b85871805526261b6c3600a4fd103538ebee96f";
