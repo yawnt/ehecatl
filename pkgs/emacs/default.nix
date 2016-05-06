@@ -4,7 +4,7 @@ let
   default = ./emacslisp/default.el;
   tmpInit = ./emacslisp/tmpInit.el;
   tmpCompile = ./emacslisp/tmpCompile.el;
-  yawntEmacs = ./emacslisp/yawnt.el;
+  yawntEmacs = ./yawnt.el;
   prelude = fetchgit {
     url = https://github.com/bbatsov/prelude.git;
     rev = "2b85871805526261b6c3600a4fd103538ebee96f";
