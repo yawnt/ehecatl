@@ -1,4 +1,6 @@
 { config, lib, pkgs, ...}: with lib;
+let zoppoDir = ../dotfiles/zoppo;
+in
 rec {
   i18n = {
     consoleFont = "Lat2-Terminus16";
@@ -41,7 +43,30 @@ rec {
     poppler
   ];
 
+  #environment.variables.ZDOTDIR = "${pkgs.zsh}";
+
   programs.zsh.enable = true;
+  programs.zsh.shellInit = ''
+    source ${zoppoDir}/templates/zshenv
+  '';
+  programs.zsh.interactiveShellInit = ''
+    # Heiwa Theme
+    zstyle ':zoppo:prompt:borra' plugins 'userhost' 'vcs-info'
+    zstyle ':zoppo:prompt:borra' prefix '%F{red}(%f'
+    zstyle ':zoppo:prompt:borra' suffix '%F{red})%f'
+    zstyle ':zoppo:prompt:borra' separator '%F{red} %f'
+    zstyle ':zoppo:prompt:borra' top '%F{red}┌%f'
+    zstyle ':zoppo:prompt:borra' bottom '%F{red}╰─%f'
+    zstyle ':zoppo:prompt:borra' prompt '%F{red}(%f%B%$((COLUMNS / 2))<...<%~%<<%b%F{red})%F{red}>%f '
+    zstyle ':zoppo:prompt:borra' rprompt '%(?..%F{red}%? ↵%f)'
+    zstyle ':zoppo:prompt:borra:plugin:userhost' format '%U%F{red}@%f%h'
+    zstyle ':zoppo:prompt:borra:plugin:vcs' format '%b%F{red}|%f%i'
+
+    source ${zoppoDir}/templates/zopporc
+  '';
+  programs.zsh.promptInit = ''
+    [ -s "${zoppoDir}/zoppo.zsh" ] && source "${zoppoDir}/zoppo.zsh"
+  '';
 
   users.extraUsers.yawnt = {
     isNormalUser = true;
@@ -55,12 +80,6 @@ rec {
   system.activationScripts.dotfiles = stringAfter [ "users" ] ''
     export USER_HOME=${users.extraUsers.yawnt.home}
 
-    # Zoppo + ZSH
-    ln -fsn ${../dotfiles/zoppo} $USER_HOME/.zoppo
-    ln -fs ${../dotfiles/zshrc} $USER_HOME/.zshrc
-    ln -fs ${../dotfiles/zopporc} $USER_HOME/.zopporc
-    ln -fs ${../dotfiles/zshenv} $USER_HOME/.zshenv
-
     # Irssi
     ln -fsn ${../dotfiles/irssi} $USER_HOME/.irssi
 
@@ -71,7 +90,6 @@ rec {
     rm -rf $USER_HOME/.sbt/0.13/plugins
     mkdir -p $USER_HOME/.sbt/0.13/plugins
     ln -fs ${../dotfiles/sbt/0.13/plugins/plugins.sbt} $USER_HOME/.sbt/0.13/plugins/plugins.sbt
-    echo 'export JAVA_HOME="${pkgs.oraclejdk8}"' > $USER_HOME/.zprofile
 
     # Konsole
     rm -rf $USER_HOME/.local/share/konsole

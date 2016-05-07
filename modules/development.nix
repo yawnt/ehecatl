@@ -1,5 +1,7 @@
 { config, lib, pkgs, ...}: with lib;
 {
+  environment.variables.JAVA_HOME = "${pkgs.oraclejdk8}";
+
   environment.systemPackages = with pkgs; [
     # Tooling
     emacs
