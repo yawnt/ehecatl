@@ -43,8 +43,6 @@ rec {
     poppler
   ];
 
-  #environment.variables.ZDOTDIR = "${pkgs.zsh}";
-
   programs.zsh.enable = true;
   programs.zsh.shellInit = ''
     source ${zoppoDir}/templates/zshenv
