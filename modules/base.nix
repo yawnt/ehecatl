@@ -1,5 +1,10 @@
 { config, lib, pkgs, ...}: with lib;
-let zoppoDir = ../dotfiles/zoppo;
+let zoppo = pkgs.fetchgit {
+  url = "https://github.com/zoppo/zoppo.git";
+  rev = "2f543ae5dc499abc8735a9c05f8b6ccba52223b3";
+  sha256 = "0jaxz81f2pn7f8b71lw28r6n2pkbnl45i4mzd2g7i08d9kyclvll";
+  fetchSubmodules = true;
+};
 in
 rec {
   i18n = {
@@ -45,7 +50,7 @@ rec {
 
   programs.zsh.enable = true;
   programs.zsh.shellInit = ''
-    source ${zoppoDir}/templates/zshenv
+    source ${zoppo}/templates/zshenv
   '';
   programs.zsh.interactiveShellInit = ''
     # Heiwa Theme
@@ -60,10 +65,10 @@ rec {
     zstyle ':zoppo:prompt:borra:plugin:userhost' format '%U%F{red}@%f%h'
     zstyle ':zoppo:prompt:borra:plugin:vcs' format '%b%F{red}|%f%i'
 
-    source ${zoppoDir}/templates/zopporc
+    source ${zoppo}/templates/zopporc
   '';
   programs.zsh.promptInit = ''
-    [ -s "${zoppoDir}/zoppo.zsh" ] && source "${zoppoDir}/zoppo.zsh"
+    [ -s "${zoppo}/zoppo.zsh" ] && source "${zoppo}/zoppo.zsh"
   '';
 
   users.extraUsers.yawnt = {

@@ -1,4 +1,0 @@
-[submodule "dotfiles/zoppo"]
-	path = dotfiles/zoppo
-	url = https://github.com/zoppo/zoppo.git
-	branch = default
