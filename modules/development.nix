@@ -9,6 +9,8 @@
     gcc
     autoconf
     automake
+    gnumake
+    cmake
     protobuf3_0
     meld
 
@@ -23,6 +25,7 @@
     leiningen
 
     # OCaml
+    ocaml
     opam
     ocamlPackages.merlin
     ocamlPackages.ocpIndent
@@ -35,6 +38,7 @@
     # Big Data
     apacheKafka
     rdkafka
+    spark
 
     # Nix
     nix-prefetch-scripts

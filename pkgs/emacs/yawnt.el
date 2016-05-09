@@ -27,9 +27,12 @@
 
 (require 'prelude-shell)
 
+(require 'prelude-ocaml)
+
 (prelude-require-packages '(nix-mode
                             protobuf-mode
                             ensime
+                            ocp-indent
                             ))
 (require 'nix-mode)
 (require 'protobuf-mode)
@@ -37,5 +40,7 @@
 (require 'ensime)
 
 (add-hook 'scala-mode-hook 'ensime-mode)
+
+(require 'ocp-indent)
 
 ;;; yawnt.el ends here
