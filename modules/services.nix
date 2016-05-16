@@ -26,11 +26,6 @@ in
       };
       videoDrivers = ["intel"];
     };
-    postgresql = {
-      enable = true;
-      package = pkgs.postgresql94;
-      authentication = "local all all ident";
-    };
     redshift = {
       enable = true;
       latitude = "41.8919300"; # Rome

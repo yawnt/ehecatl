@@ -15,7 +15,8 @@
     meld
 
     # Java
-    oraclejdk8
+    # oraclejdk8
+    jdk
     maven
 
     # Scala
@@ -30,6 +31,10 @@
     ocamlPackages.merlin
     ocamlPackages.ocpIndent
     ocamlPackages.ocaml_oasis
+
+    # Erlang
+    erlang
+    elixir
 
     # Haskell
     ghc

@@ -20,7 +20,15 @@ rec {
     whiteboard = "convert $1 -morphology Convolve DoG:15,100,0 -negate -normalize -blur 0x1 -channel RBG -level 60%,91%,0.1 $2";
   };
 
+  environment.profileRelativeEnvVars = {
+    JAVA_HOME = ["${pkgs.jdk}"];
+  };
+
   nixpkgs.config.chromium.enableWideVine = true;
+
+  networking.extraHosts = ''
+    127.0.0.1 dockerhost
+  '';
 
   environment.systemPackages = with pkgs; [
     # Network
@@ -28,6 +36,7 @@ rec {
     curl
     chromium
     irssi
+    thunderbird
 
     # System
     sudo
@@ -39,6 +48,9 @@ rec {
     powertop
     unzip
     openvpn
+    ghostscript
+    pdftk
+    libtiff
 
     # Gnome
     gnome3.gnome-tweak-tool

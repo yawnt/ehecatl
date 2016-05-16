@@ -33,6 +33,7 @@
                             protobuf-mode
                             ensime
                             ocp-indent
+                            helm-company
                             ))
 (require 'nix-mode)
 (require 'protobuf-mode)
@@ -42,5 +43,11 @@
 (add-hook 'scala-mode-hook 'ensime-mode)
 
 (require 'ocp-indent)
+
+(global-set-key "\t" 'company-complete-common)
+(eval-after-load 'company
+  '(progn
+     (define-key company-mode-map (kbd "C-:") 'helm-company)
+     (define-key company-active-map (kbd "C-:") 'helm-company)))
 
 ;;; yawnt.el ends here
