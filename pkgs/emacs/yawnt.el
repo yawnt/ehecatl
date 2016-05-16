@@ -44,10 +44,21 @@
 
 (require 'ocp-indent)
 
-(global-set-key "\t" 'company-complete-common)
-(eval-after-load 'company
-  '(progn
-     (define-key company-mode-map (kbd "C-:") 'helm-company)
-     (define-key company-active-map (kbd "C-:") 'helm-company)))
+(define-key company-mode-map [remap indent-for-tab-command]
+  'company-indent-for-tab-command)
+
+(setq tab-always-indent 'complete)
+
+(defvar completion-at-point-functions-saved nil)
+
+(defun company-indent-for-tab-command (&optional arg)
+  (interactive "P")
+  (let ((completion-at-point-functions-saved completion-at-point-functions)
+        (completion-at-point-functions '(company-complete-common-wrapper)))
+    (indent-for-tab-command arg)))
+
+(defun company-complete-common-wrapper ()
+  (let ((completion-at-point-functions completion-at-point-functions-saved))
+        (helm-company)))
 
 ;;; yawnt.el ends here
