@@ -1,6 +1,8 @@
 { config, lib, pkgs, ...}: with lib;
 {
-  environment.variables.JAVA_HOME = "${pkgs.oraclejdk8}";
+  environment.profileRelativeEnvVars = {
+    JAVA_HOME = ["${pkgs.oraclejdk8}"];
+  };
 
   environment.systemPackages = with pkgs; [
     # Tooling
@@ -15,8 +17,7 @@
     meld
 
     # Java
-    # oraclejdk8
-    jdk
+    oraclejdk8
     maven
 
     # Scala
