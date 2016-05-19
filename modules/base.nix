@@ -61,6 +61,9 @@ rec {
     libreoffice
     poppler_utils
     poppler
+
+    # Virtualization
+    linuxPackages.virtualbox
   ];
 
   programs.zsh.enable = true;
