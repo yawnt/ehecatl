@@ -5,7 +5,7 @@ in
   services = {
     printing = {
       enable = true;
-      drivers = [ pkgs.gutenprint ];
+      drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
     };
     xserver = {
       enable = true;
@@ -33,9 +33,12 @@ in
     };
   };
 
-  virtualisation.docker = {
-    enable = true;
-    extraOptions = "${dockerCfg}";
+  virtualisation = {
+    docker = {
+      enable = true;
+      extraOptions = "${dockerCfg}";
+    };
+    #virtualbox.host.enable = true;
   };
 
   systemd.user.services.emacs = {

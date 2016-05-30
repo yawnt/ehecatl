@@ -51,5 +51,8 @@
 
     # Docker
     python27Packages.docker_compose
+
+    # Node
+    nodejs
   ];
 }

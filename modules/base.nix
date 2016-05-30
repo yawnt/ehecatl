@@ -33,6 +33,7 @@ rec {
     chromium
     irssi
     thunderbird
+    transmission_gtk
 
     # System
     sudo
@@ -47,6 +48,7 @@ rec {
     ghostscript
     pdftk
     libtiff
+    p7zip
 
     # Gnome
     gnome3.gnome-tweak-tool
@@ -61,9 +63,6 @@ rec {
     libreoffice
     poppler_utils
     poppler
-
-    # Virtualization
-    linuxPackages.virtualbox
   ];
 
   programs.zsh.enable = true;
@@ -91,7 +90,7 @@ rec {
 
   users.extraUsers.yawnt = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "vboxusers" ];
     useDefaultShell = true;
     initialPassword = "password";
     home = "/home/yawnt";
