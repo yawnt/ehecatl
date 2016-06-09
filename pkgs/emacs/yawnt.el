@@ -31,16 +31,14 @@
 
 (prelude-require-packages '(nix-mode
                             protobuf-mode
-                            ensime
                             ocp-indent
                             helm-company
+                            hindent
+                            haskell-mode
+                            intero
                             ))
 (require 'nix-mode)
 (require 'protobuf-mode)
-
-(require 'ensime)
-
-(add-hook 'scala-mode-hook 'ensime-mode)
 
 (require 'ocp-indent)
 
@@ -59,6 +57,13 @@
 
 (defun company-complete-common-wrapper ()
   (let ((completion-at-point-functions completion-at-point-functions-saved))
-        (helm-company)))
+        (company-complete-common)))
+
+(require 'haskell-mode)
+(require 'hindent)
+(require 'intero)
+
+(add-hook 'intero-mode-hook 'hindent-mode)
+(add-hook 'haskell-mode-hook 'intero-mode)
 
 ;;; yawnt.el ends here

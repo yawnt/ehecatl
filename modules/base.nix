@@ -49,6 +49,8 @@ rec {
     pdftk
     libtiff
     p7zip
+    ntfs3g
+    pciutils
 
     # Gnome
     gnome3.gnome-tweak-tool

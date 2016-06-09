@@ -7,8 +7,8 @@ let
   yawntEmacs = ./yawnt.el;
   prelude = fetchgit {
     url = https://github.com/bbatsov/prelude.git;
-    rev = "2b85871805526261b6c3600a4fd103538ebee96f";
-    sha256 = "1vl7v3gks78r4k9dzhhzhlkwqjaxmv13pd9zv1hz0d3k84mryc3c";
+    rev = "f27de9705ca92a790693ff7354ff5e19af94feb9";
+    sha256 = "0dvsvv2h43xrp4sa79a8qvj5wa0rz5iqp55lgl9j6xwg6slzwwl5";
   };
 in
 emacs.overrideDerivation (drv : {

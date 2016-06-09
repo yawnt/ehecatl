@@ -32,7 +32,9 @@ in
       longitude = "12.5113300";
     };
   };
-
+  services.postgresql.enable = true;
+  services.postgresql.package = pkgs.postgresql94;
+  services.postgresql.authentication = "local all all ident";
   virtualisation = {
     docker = {
       enable = true;

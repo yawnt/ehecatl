@@ -39,7 +39,8 @@
 
     # Haskell
     ghc
-    stack
+    cabal-install
+    haskellEnv
 
     # Big Data
     apacheKafka
