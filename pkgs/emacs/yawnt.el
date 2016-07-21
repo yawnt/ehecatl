@@ -29,18 +29,23 @@
 
 (require 'prelude-ocaml)
 
+(require 'prelude-latex)
+
 (prelude-require-packages '(nix-mode
                             protobuf-mode
                             ocp-indent
                             helm-company
-                            hindent
+                            yaml-mode
+                            markdown-mode
                             haskell-mode
-                            intero
                             ))
 (require 'nix-mode)
 (require 'protobuf-mode)
 
 (require 'ocp-indent)
+
+(require 'yaml-mode)
+(require 'markdown-mode)
 
 (define-key company-mode-map [remap indent-for-tab-command]
   'company-indent-for-tab-command)
@@ -60,10 +65,5 @@
         (company-complete-common)))
 
 (require 'haskell-mode)
-(require 'hindent)
-(require 'intero)
-
-(add-hook 'intero-mode-hook 'hindent-mode)
-(add-hook 'haskell-mode-hook 'intero-mode)
 
 ;;; yawnt.el ends here

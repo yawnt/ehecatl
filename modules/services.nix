@@ -5,7 +5,7 @@ in
   services = {
     printing = {
       enable = true;
-      drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
+      drivers = [ pkgs.gutenprint pkgs.postscript-lexmark pkgs.splix ];
     };
     xserver = {
       enable = true;

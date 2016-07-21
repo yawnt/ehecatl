@@ -20,7 +20,10 @@ rec {
     whiteboard = "convert $1 -morphology Convolve DoG:15,100,0 -negate -normalize -blur 0x1 -channel RBG -level 60%,91%,0.1 $2";
   };
 
+  environment.variables.PATH = [ "${pkgs.update-resolv-conf}/libexec/openvpn/" "${users.extraUsers.yawnt.home}/.bin" ];
+
   nixpkgs.config.chromium.enableWideVine = true;
+  nixpkgs.config.chromium.enablePepperFlash = true;
 
   networking.extraHosts = ''
     127.0.0.1 dockerhost
@@ -34,6 +37,7 @@ rec {
     irssi
     thunderbird
     transmission_gtk
+    update-resolv-conf
 
     # System
     sudo
@@ -51,13 +55,14 @@ rec {
     p7zip
     ntfs3g
     pciutils
+    zlib
+
 
     # Gnome
     gnome3.gnome-tweak-tool
     gnome.libgnomecups
 
     # Media
-    cutegram
     mpv
     inkscape
 
@@ -65,6 +70,7 @@ rec {
     libreoffice
     poppler_utils
     poppler
+    texlive.combined.scheme-basic
   ];
 
   programs.zsh.enable = true;

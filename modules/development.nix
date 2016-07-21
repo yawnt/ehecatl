@@ -8,6 +8,7 @@
     # Tooling
     emacs
     git
+    gitAndTools.gitflow
     gcc
     autoconf
     automake
@@ -39,8 +40,6 @@
 
     # Haskell
     ghc
-    cabal-install
-    haskellEnv
 
     # Big Data
     apacheKafka
@@ -49,6 +48,10 @@
 
     # Nix
     nix-prefetch-scripts
+
+    # Nim
+    nim
+    nimble
 
     # Docker
     python27Packages.docker_compose
